@@ -39,15 +39,20 @@ loop:
     lw t2, 0(t1)
     beq t2, x0, exit
     add a0, x0, t2 # 1
+
     addi sp, sp, -4
     sw t0, 0(sp)
+
     jal fun
+
     lw t0, 0(sp)
     addi sp, sp, 4
+
     add t3, s2, s3 # 4
     sw a0, 0(t3) # 5
     add s0, s0, a0 # 6
     addi t0, t0, 1
+
     jal x0, loop
 exit:
     addi a0, x0, 1 # argument to ecall, 1 = execute print integer
