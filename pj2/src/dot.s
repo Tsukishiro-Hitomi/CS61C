@@ -30,10 +30,10 @@ dot:
     blt a3, t0, exception2
     blt a4, t0, exception2
 
-    mv t0, zero    # element index
-    mv t1, zero    # result
-    mv t2, zero    # arr0 index
-    mv t3, zero    # arr1 index
+    mv t0, zero         # element index
+    mv t1, zero         # result
+    mv t2, zero         # arr0 index
+    mv t3, zero         # arr1 index
 
 loop_start:
     beq t0, a2, loop_end

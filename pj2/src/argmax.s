@@ -21,10 +21,10 @@ loop_start:
     addi t0, zero, 1
     blt a1, t0, exception
 
-    addi t1, zero, 1    # t1: cur_index
-    mv t2, zero    # t2: max_index
+    addi t1, zero, 1            # t1: cur_index
+    mv t2, zero                 # t2: max_index
 
-    lw t3, 0(a0)   # t3: max_value
+    lw t3, 0(a0)                # t3: max_value
 
 
 loop_continue:
@@ -32,7 +32,7 @@ loop_continue:
 
     slli t4, t1, 2
     add t4, t4, a0
-    lw t5, 0(t4)    # t5: cur_value
+    lw t5, 0(t4)                # t5: cur_value
     bge t3, t5, foo
     mv t3, t5
     mv t2, t1

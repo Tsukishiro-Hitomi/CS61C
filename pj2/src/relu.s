@@ -17,14 +17,14 @@ relu:
     addi sp, sp, -4
     sw s0, 0(sp)
 
-    addi t0, zero, 1    # t0 = 1
+    addi t0, zero, 1            # t0 = 1
     blt a1, t0, exception
 
-    mv t1, zero    # t1 = zero
+    mv t1, zero                 # t1 = zero
 loop_start:
     beq t1, a1, end
     
-    slli t2, t1, 2    # t2 = offset
+    slli t2, t1, 2              # t2 = offset
     add t2, a0, t2
 
     lw t3, 0(t2)
@@ -44,22 +44,3 @@ end:
 exception:
     li a0 36
     j exit
-
-
-
-
-
-
-
-
-loop_continue:
-
-
-
-loop_end:
-
-
-    # Epilogue
-
-
-    jr ra
