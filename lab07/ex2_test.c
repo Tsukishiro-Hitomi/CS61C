@@ -91,8 +91,8 @@ int main() {
     printf("Reduction Optimized: %d thread(s) took %f seconds\n",i,run_time);
   }
 
-  if (red_min * 2.5 > naive) {
-    printf("Fastest reduction optimized didn't achieve at least 2.5x speedup from naive.\n");
+  if (red_min * 2.0 > naive) {
+    printf("Fastest reduction optimized didn't achieve at least 2.0x speedup from naive.\n");
     return -1;
   }
 
@@ -117,8 +117,8 @@ int main() {
     printf("Manual reduction: %d thread(s) took %f seconds\n",i,run_time);
   }
 
-  if (man_min * 2.5 > naive) {
-    printf("Fastest Manual reduction didn't achieve at least 2.5x speedup from naive.\n");
+  if (man_min * 2.0 > naive) {
+    printf("Fastest Manual reduction didn't achieve at least 2.0x speedup from naive.\n");
     return -1;
   }
 

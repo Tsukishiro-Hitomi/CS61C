@@ -1,0 +1,40 @@
+ex1:
+Let's generate a randomized array.
+Starting randomized sum.
+Time taken: 9.072886 s
+Sum: 103161741312
+
+Starting randomized unrolled sum.
+Time taken: 8.728707 s
+Sum: 103161741312
+
+Starting randomized SIMD sum.
+Time taken: 2.109090 s
+Sum: 103161741312
+
+Starting randomized SIMD unrolled sum.
+Time taken: 2.027689 s
+Sum: 103161741312
+
+All tests Passed! Correct values were produced, and speedups were achieved!
+
+ex2:
+Naive: 1 thread took 4.990580 seconds
+Critical: 1 thread(s) took 14.938847 seconds
+Reduction Optimized: 1 thread(s) took 5.441069 seconds
+Reduction Optimized: 2 thread(s) took 3.630368 seconds
+Reduction Optimized: 3 thread(s) took 0.986297 seconds
+Reduction Optimized: 4 thread(s) took 1.249176 seconds
+Reduction Optimized: 5 thread(s) took 1.931055 seconds
+Reduction Optimized: 6 thread(s) took 1.391015 seconds
+Reduction Optimized: 7 thread(s) took 0.916670 seconds
+Reduction Optimized: 8 thread(s) took 2.283370 seconds
+Manual reduction: 1 thread(s) took 1.816783 seconds
+Manual reduction: 2 thread(s) took 1.048034 seconds
+Manual reduction: 3 thread(s) took 0.971924 seconds
+Manual reduction: 4 thread(s) took 1.617827 seconds
+Manual reduction: 5 thread(s) took 1.288246 seconds
+Manual reduction: 6 thread(s) took 1.671870 seconds
+Manual reduction: 7 thread(s) took 2.215208 seconds
+Manual reduction: 8 thread(s) took 3.761181 seconds
+Congrats! All dotp tests passed
