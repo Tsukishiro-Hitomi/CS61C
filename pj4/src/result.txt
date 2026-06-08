@@ -1,0 +1,19 @@
+naive:
+test_ag_random: 24335ms
+test_ag_increasing: 15961ms
+test_ag_decreasing: 13790ms
+
+SIMD:
+test_ag_random: 5068ms 4.80x
+test_ag_increasing: 3393ms 4.70x
+test_ag_decreasing: 2736ms 5.04x
+
+SIMD + OMP:
+test_ag_random: 2651ms 9.18x
+test_ag_increasing: 2890ms 5.52x
+test_ag_decreasing: 1703ms 8.10x
+
+SIMD + OMP + Algorithmic:
+test_ag_random:
+test_ag_increasing:
+test_ag_decreasing:

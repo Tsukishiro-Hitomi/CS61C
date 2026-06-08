@@ -7,8 +7,77 @@
 int convolve(matrix_t *a_matrix, matrix_t *b_matrix, matrix_t **output_matrix) {
   // TODO: convolve matrix a and matrix b, and store the resulting matrix in
   // output_matrix
+  uint32_t a_rows = a_matrix->rows;
+  uint32_t a_cols = a_matrix->cols;
+  int32_t * a_data = a_matrix->data;
+  uint32_t b_rows = b_matrix->rows;
+  uint32_t b_cols = b_matrix->cols;
+  int32_t * b_data = b_matrix->data;
 
-  return -1;
+  if (a_rows <= 0 || a_cols <= 0 || b_rows <= 0 || b_cols <= 0) {
+    return -1;
+  }
+
+  if (b_rows > a_rows || b_cols > a_cols) {
+    return -1;
+  }
+
+  // allocate memory for result matrix
+
+  uint32_t result_rows = a_rows - b_rows + 1;
+  uint32_t result_cols = a_cols - b_cols + 1;
+  int32_t * result_data = (int32_t *)malloc(result_rows * result_cols * (sizeof(int32_t)));
+  if (result_data == NULL) {
+    printf("Memory allocation failed.");
+    return -1;
+  }
+
+  matrix_t * result = (matrix_t *)malloc(sizeof(matrix_t));
+  if (result == NULL) {
+    printf("Memory allocation failed.");
+    return -1;
+  }
+
+  result->rows = result_rows;
+  result->cols = result_cols;
+  result->data = result_data;
+
+  // convolution using SIMD
+  // and using OMP
+  #pragma omp parallel for
+  for (uint32_t i = 0; i < result_rows; i++) {
+      uint32_t sim_cols_bound = (result_cols / 8) * 8;
+
+      for (uint32_t j = 0; j < sim_cols_bound; j += 8) {
+          __m256i sum_vec = _mm256_setzero_si256();
+
+          for (uint32_t c = 0; c < b_rows; c++) {
+              for (uint32_t d = 0; d < b_cols; d++){
+                  // for each element of b_data: broadcast and multiply it with the corresponding positions of matrix a
+                  int32_t b_val = b_data[c * b_cols + d];
+                  __m256i b_vec = _mm256_set1_epi32(b_val);
+                  __m256i a_vec = _mm256_loadu_si256((__m256i const *)(&a_data[(i + c) * a_cols + (j + d)]));
+                  sum_vec = _mm256_add_epi32(sum_vec, (_mm256_mullo_epi32(a_vec, b_vec)));
+              }
+          }
+
+          _mm256_storeu_si256((__m256i *)(&result_data[i * result_cols + j]), sum_vec);
+      }
+
+      // process the tail case using compute_naive
+      for (uint32_t j = sim_cols_bound; j < result_cols; j++) {
+          uint32_t sum = 0;
+          for (uint32_t c = 0; c < b_rows; c++) {
+              for (uint32_t d = 0; d < b_cols; d++) {
+                  sum += b_data[c * b_cols + d] * a_data[(i + c) * a_cols + j + d];
+              }
+          }
+          result_data[i * result_cols + j] = sum;
+      }
+  }
+
+  * output_matrix = result;
+  return 0;
 }
 
 // Executes a task
