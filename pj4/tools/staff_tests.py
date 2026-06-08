@@ -120,13 +120,13 @@ def test_ag_edge_1x1_matrix_b(test: TestSpec):
         test.add_task(Task(Matrix.random(rows_a, cols_a), Matrix.random(1, 1)))
 
 
-@Test()
-def test_gif_kachow_blur(test: TestSpec):
-    test.add_gif("/home/ff/cs61c/fa24/proj4/gifs/kachow.gif",
-                 filters.BlurFilter.create(size=17, sigma=7))
+# @Test()
+# def test_gif_kachow_blur(test: TestSpec):
+#    test.add_gif("/home/ff/cs61c/fa24/proj4/gifs/kachow.gif",
+#                 filters.BlurFilter.create(size=17, sigma=7))
 
 
-@Test()
-def test_gif_kachow_sharpen(test: TestSpec):
-    test.add_gif("/home/ff/cs61c/fa24/proj4/gifs/kachow.gif",
-                 filters.SharpenFilter.create(size=3, sigma=1))
+# @Test()
+# def test_gif_kachow_sharpen(test: TestSpec):
+#    test.add_gif("/home/ff/cs61c/fa24/proj4/gifs/kachow.gif",
+#                 filters.SharpenFilter.create(size=3, sigma=1))

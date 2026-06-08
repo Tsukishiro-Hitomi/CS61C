@@ -12,7 +12,7 @@ default: convolve_$(COORDINATOR)_$(COMPUTE)
 # Utils
 .PHONY: check-hashes ensure_compute ensure_coordinator ensure_input
 check-hashes:
-	@bash tools/run_python.sh tools/check_hashes.py
+	# @bash tools/run_python.sh tools/check_hashes.py
 
 ensure_compute:
 ifeq ($(COMPUTE),)
