@@ -39,21 +39,6 @@ int convolve(matrix_t *a_matrix, matrix_t *b_matrix, matrix_t **output_matrix) {
   result->cols = result_cols;
   result->data = result_data;
 
-  // filp matrix_b
-  int32_t *flipped_b = (int32_t *)malloc(b_rows * b_cols * sizeof(int32_t));
-  if (flipped_b == NULL) {
-    printf("Memory allocation failed.");
-    free(result_data);
-    free(result);
-    return -1;
-  }
-
-  for (uint32_t i = 0; i < b_rows; i++) {
-    for (uint32_t j = 0; j < b_cols; j++) {
-      flipped_b[i * b_cols + j] = b_data[(b_rows - 1 - i) * b_cols + (b_cols - 1 - j)];
-    }
-  }
-
   // convolution
 
   for (uint32_t i = 0; i < result_rows; i++) {
@@ -69,7 +54,6 @@ int convolve(matrix_t *a_matrix, matrix_t *b_matrix, matrix_t **output_matrix) {
   }
 
   * output_matrix = result;
-  free(flipped_b);
   return 0;
 }
 
